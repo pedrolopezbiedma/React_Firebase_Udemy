@@ -24,14 +24,17 @@
             const Banner = () => {
                 const title = 'This is the website Title.'
                 const subtitle = 'this is the subtitle.'
-                const link = 'www.as.com'
+
+                const handleClick = (event) => {
+                    console.log('El subtitle es: ', subtitle);
+                    console.log('El evento que llega es: ', event);
+                }
 
                 return (
                     <div className='banner'>
                         <h2>{title.toUpperCase()}</h2>
                         <p>{subtitle}</p>
-                        <p>Today's date is: {new Date().toDateString()}</p>
-                        <a href={link}>This is the link to AS</a>
+                        <button onClick={handleClick} >Click me</button>
                     </div>
                 )
             }
