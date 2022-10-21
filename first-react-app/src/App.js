@@ -1,17 +1,18 @@
+import { useState } from 'react';
 import './App.css';
 
 function App() {
-  let name = 'Mario'
+  const [name, setName] = useState('Mario')
 
   const updateName = () => {
-    name = 'Luigi';
+    setName('Luigi');
     console.log(name);
   }
 
   return (
     <div className="App">
       <p>My name is: {name}</p>
-      <button onClick={updateName}>Change my name</button>
+      <button onClick={updateName}>Change name</button>
     </div>
   );
 }
