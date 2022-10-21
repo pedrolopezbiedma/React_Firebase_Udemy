@@ -2,6 +2,7 @@ import { useState } from 'react';
 import './App.css';
 
 function App() {
+  const [showEvents, setShowEvents] = useState(true)
   const [events, setEvents] = useState([
     { id: 1, title: 'Im Mario!!!!' },
     { id: 2, title: 'Im Luigi!!!!' },
@@ -9,7 +10,6 @@ function App() {
   ])
 
   const handleClick = (clickedEventId) => {
-    console.log('clicked Event', clickedEventId);
     setEvents((previousEvents) => {
       return previousEvents.filter((event) => {
         return event.id !== clickedEventId
@@ -19,7 +19,15 @@ function App() {
 
   return (
     <div className="App">
-      { events.map((event, mapIndex) => (
+      { !showEvents && (
+        <button onClick={() => setShowEvents(true)} >Show events list</button>
+      )}
+
+      { showEvents && (
+        <button onClick={() => setShowEvents(false)} >Hide events list</button>
+      )}
+
+      {showEvents && events.map((event, mapIndex) => (
         <div key={event.id} >
           <h2>{mapIndex} - { event.title }</h2>
           <button onClick={ ()=>{handleClick(event.id)} }>Delete Event</button>
