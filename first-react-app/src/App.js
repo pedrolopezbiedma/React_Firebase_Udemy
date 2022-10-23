@@ -3,6 +3,7 @@ import './App.css';
 
 import Title from './components/Title';
 import Modal from "./components/Modal";
+import EventList from './components/EventList';
 
 function App() {
   const subtitle = 'All the latest events in Marioland';
@@ -14,7 +15,7 @@ function App() {
     { id: 3, title: 'Im Peach!!!!' }
   ])
 
-  const handleClick = (clickedEventId) => {
+  const handleClickedEvent = (clickedEventId) => {
     setEvents((previousEvents) => {
       return previousEvents.filter((event) => {
         return event.id !== clickedEventId
@@ -29,12 +30,6 @@ function App() {
   return (
     <div className="App">
       <Title tutle='Events in Your Area' subtitle={subtitle}/>
-      <Title tutle='Another title' subtitle='Another subtitle'/>
-
-      <div className='ShowModal'>
-        <button onClick={toggleModal}>Show Modal</button>
-        <br />
-      </div>
 
       { !showEvents && (
         <button onClick={() => setShowEvents(true)} >Show events list</button>
@@ -44,13 +39,15 @@ function App() {
         <button onClick={() => setShowEvents(false)} >Hide events list</button>
       )}
 
-      {showEvents && events.map((event, mapIndex) => (
-        <div key={event.id} >
-          <h2>{mapIndex} - { event.title }</h2>
-          <button onClick={ ()=>{handleClick(event.id)} }>Delete Event</button>
-        </div>
-      )) }
+      { showEvents &&
+        <EventList events={events} handleClickedEvent={handleClickedEvent}/ >
+      }
 
+      <div className='showModal'>
+        <br />
+        <button onClick={toggleModal}>Show Modal</button>
+        <br />
+      </div>
       {showModal && (
         <Modal toggleModal={toggleModal}>
           <h2>100% Discount!!!</h2>
