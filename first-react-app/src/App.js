@@ -2,6 +2,7 @@ import { useState } from 'react';
 import './App.css';
 
 import Title from './components/Title';
+import Modal from "./components/Modal";
 
 function App() {
   const subtitle = 'All the latest events in Marioland';
@@ -39,6 +40,13 @@ function App() {
           <button onClick={ ()=>{handleClick(event.id)} }>Delete Event</button>
         </div>
       )) }
+
+      <Modal />
+
+      <Modal>
+        <h2>100% Discount!!!</h2>
+        <p>Use the 'NINJA! code at the checkout.</p>
+      </Modal>
     </div>
   );
 }
