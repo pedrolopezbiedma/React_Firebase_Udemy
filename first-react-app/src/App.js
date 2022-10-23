@@ -6,7 +6,7 @@ import Modal from "./components/Modal";
 
 function App() {
   const subtitle = 'All the latest events in Marioland';
-  const [showModal, setShowModal] = useState(true)
+  const [showModal, setShowModal] = useState(false)
   const [showEvents, setShowEvents] = useState(true)
   const [events, setEvents] = useState([
     { id: 1, title: 'Im Mario!!!!' },
@@ -22,13 +22,19 @@ function App() {
     })
   }
 
-  const handleClose = () => {
-    setShowModal(false);
+  const toggleModal = () => {
+    setShowModal(!showModal);
   }
+
   return (
     <div className="App">
       <Title tutle='Events in Your Area' subtitle={subtitle}/>
       <Title tutle='Another title' subtitle='Another subtitle'/>
+
+      <div className='ShowModal'>
+        <button onClick={toggleModal}>Show Modal</button>
+        <br />
+      </div>
 
       { !showEvents && (
         <button onClick={() => setShowEvents(true)} >Show events list</button>
@@ -46,10 +52,7 @@ function App() {
       )) }
 
       {showModal && (
-        < Modal showModal={handleClose}/>
-      )} 
-      {showModal && (
-        <Modal handleClose={handleClose}>
+        <Modal toggleModal={toggleModal}>
           <h2>100% Discount!!!</h2>
           <p>Use the 'NINJA! code at the checkout.</p>
         </Modal>
