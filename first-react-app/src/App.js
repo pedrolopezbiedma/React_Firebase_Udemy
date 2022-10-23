@@ -4,6 +4,7 @@ import './App.css';
 import Title from './components/Title';
 
 function App() {
+  const subtitle = 'All the latest events in Marioland';
   const [showEvents, setShowEvents] = useState(true)
   const [events, setEvents] = useState([
     { id: 1, title: 'Im Mario!!!!' },
@@ -21,8 +22,9 @@ function App() {
 
   return (
     <div className="App">
-      <Title />
-      
+      <Title tutle='Events in Your Area' subtitle={subtitle}/>
+      <Title tutle='Another title' subtitle='Another subtitle'/>
+
       { !showEvents && (
         <button onClick={() => setShowEvents(true)} >Show events list</button>
       )}
