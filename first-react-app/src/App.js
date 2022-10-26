@@ -29,7 +29,7 @@ function App() {
 
   return (
     <div className="App">
-      <Title tutle='Events in Your Area' subtitle={subtitle}/>
+      <Title title='Events in Your Area' subtitle={subtitle}/>
 
       { !showEvents && (
         <button onClick={() => setShowEvents(true)} >Show events list</button>
