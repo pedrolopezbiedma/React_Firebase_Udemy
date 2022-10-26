@@ -49,7 +49,7 @@ function App() {
         <br />
       </div>
       {showModal && (
-        <Modal toggleModal={toggleModal}>
+        <Modal toggleModal={toggleModal} isSalesModal={true}>
           <h2>100% Discount!!!</h2>
           <p>Use the 'NINJA! code at the checkout.</p>
         </Modal>
