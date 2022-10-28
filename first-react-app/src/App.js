@@ -10,13 +10,20 @@ function App() {
   const subtitle = 'All the latest events in Marioland';
   const [showModal, setShowModal] = useState(false)
   const [showEvents, setShowEvents] = useState(true)
-  const [events, setEvents] = useState([
-    { id: 1, title: 'Im Mario!!!!' },
-    { id: 2, title: 'Im Luigi!!!!' },
-    { id: 3, title: 'Im Peach!!!!' }
-  ])
+  const [events, setEvents] = useState([])
 
-  const handleClickedEvent = (clickedEventId) => {
+  const toggleModal = () => {
+    setShowModal(!showModal);
+  }
+
+  const handleNewEvent = (newEvent) => {
+    setEvents((prevEvents) => {
+      return [...prevEvents, newEvent]
+    })
+    toggleModal();
+  }
+
+  const handleDeleteEvent = (clickedEventId) => {
     setEvents((previousEvents) => {
       return previousEvents.filter((event) => {
         return event.id !== clickedEventId
@@ -24,9 +31,6 @@ function App() {
     })
   }
 
-  const toggleModal = () => {
-    setShowModal(!showModal);
-  }
 
   return (
     <div className="App">
@@ -41,7 +45,7 @@ function App() {
       )}
 
       { showEvents &&
-        <EventList events={events} handleClickedEvent={handleClickedEvent}/ >
+        <EventList events={events} handleDeleteEvent={handleDeleteEvent}/ >
       }
 
       <div className='showModal'>
@@ -50,8 +54,8 @@ function App() {
         <br />
       </div>
       {showModal && (
-        <Modal toggleModal={toggleModal} isSalesModal={true}>
-          <NewEventForm />
+        <Modal isSalesModal={true}>
+          <NewEventForm handleNewEvent={handleNewEvent}/>
         </Modal>
       )}
 

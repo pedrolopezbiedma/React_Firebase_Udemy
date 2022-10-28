@@ -1,6 +1,6 @@
 import './Modal.css';
 
-export default function Modal({children, toggleModal, isSalesModal}) {
+export default function Modal({children, isSalesModal}) {
   return (
     <div className='modal-backdrop'>
         <div className="modal" style={{
@@ -9,7 +9,6 @@ export default function Modal({children, toggleModal, isSalesModal}) {
             textAlign:"center"
           }}>
             {children}
-            <button className={isSalesModal ? "sales-btn" : ""} onClick={toggleModal}>Close</button>
         </div>
     </div>
   )

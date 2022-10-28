@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import './NewEventForm.css'
 
-export default function NewEventForm() {
+export default function NewEventForm({ handleNewEvent }) {
   const [title, setTitle] = useState('');
   const [date, setDate] = useState('');
 
@@ -13,15 +13,14 @@ export default function NewEventForm() {
       date: date
     }
     resetForm()
-
-    console.log('El evento nuevo es -> ', newEvent);
+    handleNewEvent(newEvent)
   }
 
   const resetForm = () => {
     setTitle('')
     setDate('')
   }
-  
+
   return (
     <form onSubmit={handleSubmit} className='new-event-form'>
         <label>
