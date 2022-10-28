@@ -4,6 +4,7 @@ import './App.css';
 import Title from './components/Title';
 import Modal from "./components/Modal";
 import EventList from './components/EventList';
+import NewEventForm from './components/NewEventForm';
 
 function App() {
   const subtitle = 'All the latest events in Marioland';
@@ -45,13 +46,12 @@ function App() {
 
       <div className='showModal'>
         <br />
-        <button onClick={toggleModal}>Show Modal</button>
+        <button onClick={toggleModal}>Add New Event</button>
         <br />
       </div>
       {showModal && (
         <Modal toggleModal={toggleModal} isSalesModal={true}>
-          <h2>100% Discount!!!</h2>
-          <p>Use the 'NINJA! code at the checkout.</p>
+          <NewEventForm />
         </Modal>
       )}
 
