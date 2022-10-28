@@ -5,8 +5,25 @@ export default function NewEventForm() {
   const [title, setTitle] = useState('');
   const [date, setDate] = useState('');
 
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    const newEvent = {
+      id: Math.floor(Math.random() * 10000),
+      title: title,
+      date: date
+    }
+    resetForm()
+
+    console.log('El evento nuevo es -> ', newEvent);
+  }
+
+  const resetForm = () => {
+    setTitle('')
+    setDate('')
+  }
+  
   return (
-    <form className='new-event-form'>
+    <form onSubmit={handleSubmit} className='new-event-form'>
         <label>
             <span>Event Title:</span>
             <input type="text" value={title} onChange={(event) => {setTitle(event.target.value)}}/>
@@ -15,11 +32,7 @@ export default function NewEventForm() {
             <span>Event Date:</span>
             <input type="date" value={date} onChange={(event) => {setDate(event.target.value)}}/>
         </label>
-        <br />
-        <span>title - {title}</span>
-        <br />
-        <span>date - {date}</span>
-        <br />
+
         <button>Submit Event</button>
     </form>
   )
