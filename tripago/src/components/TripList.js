@@ -4,12 +4,16 @@ import './TripList.css'
 
 export default function TripList() {
     const [url, setUrl] = useState('http://localhost:3000/trips')
-    const { data: trips, isLoading } = useFetch(url);
+    const { data: trips, isLoading, error } = useFetch(url);
 
     return (
         <div className='trip-list'>
             <h2>TripList</h2>
-            
+
+            { error && (
+                <div>{ error }</div>
+            )}
+
             { isLoading && (
                 <div>Loading trips...</div>
             )}
