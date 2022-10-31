@@ -3,12 +3,12 @@ import './App.css';
 import SingleCard from './components/SingleCard';
 
 const cardImages = [
-  { "src": "/img/helmet-1.png" },
-  { "src": "/img/potion-1.png" },
-  { "src": "/img/ring-1.png" },
-  { "src": "/img/scroll-1.png" },
-  { "src": "/img/shield-1.png" },
-  { "src": "/img/sword-1.png" },
+  { "src": "/img/helmet-1.png" , "matched": false },
+  { "src": "/img/potion-1.png" , "matched": false },
+  { "src": "/img/ring-1.png" , "matched": false },
+  { "src": "/img/scroll-1.png" , "matched": false },
+  { "src": "/img/shield-1.png" , "matched": false },
+  { "src": "/img/sword-1.png" , "matched": false },
 ]
 
 function App() {
@@ -39,14 +39,22 @@ function App() {
   useEffect(() => {
     if(choiceOne && choiceTwo){
       if(choiceOne.src === choiceTwo.src){
-        console.log(' ##### They match ##### ');
+        setCards(prevCards => {
+          return prevCards.map(prevCard => {
+            if(prevCard.src === choiceOne.src) {
+              return { ...prevCard, matched: true}
+            }
+            else {
+              return prevCard
+            }
+          })
+        })
       } else {
         console.log('##### They dont match ##### ');
       }
       resetChoices()
     }
   }, [choiceOne, choiceTwo])
-  
 
   return (
     <div className="App">
@@ -58,6 +66,8 @@ function App() {
           <SingleCard key={ card.id } card={ card } handleChoice={ handleChoice }/>
         ))}
       </div>
+
+      <div>Turns: { turns } </div>
     </div>
   );
 }
