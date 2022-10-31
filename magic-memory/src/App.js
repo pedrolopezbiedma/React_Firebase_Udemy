@@ -49,10 +49,11 @@ function App() {
             }
           })
         })
+        resetChoices()
       } else {
-        console.log('##### They dont match ##### ');
+        setTimeout(() => resetChoices(), 500)
       }
-      resetChoices()
+
     }
   }, [choiceOne, choiceTwo])
 
@@ -63,7 +64,12 @@ function App() {
 
       <div className='card-grid'>
         { cards.map(card => (
-          <SingleCard key={ card.id } card={ card } handleChoice={ handleChoice }/>
+          <SingleCard
+            key={ card.id }
+            card={ card }
+            flipped= { choiceOne === card || choiceTwo === card || card.matched }
+            handleChoice={ handleChoice }
+          />
         ))}
       </div>
 
