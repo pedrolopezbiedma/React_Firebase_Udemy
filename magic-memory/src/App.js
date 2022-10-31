@@ -16,28 +16,15 @@ function App() {
   const [turns, setTurns] = useState(0)
   const [choiceOne, setChoiceOne] = useState(null)
   const [choiceTwo, setChoiceTwo] = useState(null)
+  const [disabled, setDisabled] = useState(false)
 
-  const startNewGame = () => {
-    const shuffledCards = [...cardImages, ...cardImages]
-      .sort(() => { return Math.random() - 0.5 })
-      .map((card) => { return { ...card, id: Math.random()}})
-
-      setCards(shuffledCards)
-      setTurns(0)
-  }
-
-  const handleChoice = (card) => {
-    choiceOne ? setChoiceTwo(card) : setChoiceOne(card)
-  }
-
-  const resetChoices = () => {
-    setChoiceOne(null)
-    setChoiceTwo(null)
-    setTurns(turns => turns + 1)
-  }
+  useEffect(() => {
+    startNewGame()
+  }, [])
 
   useEffect(() => {
     if(choiceOne && choiceTwo){
+      setDisabled(true)
       if(choiceOne.src === choiceTwo.src){
         setCards(prevCards => {
           return prevCards.map(prevCard => {
@@ -53,9 +40,31 @@ function App() {
       } else {
         setTimeout(() => resetChoices(), 500)
       }
-
     }
   }, [choiceOne, choiceTwo])
+
+
+  const startNewGame = () => {
+    const shuffledCards = [...cardImages, ...cardImages]
+      .sort(() => { return Math.random() - 0.5 })
+      .map((card) => { return { ...card, id: Math.random()}})
+
+      setChoiceOne(null)
+      setChoiceTwo(null)
+      setCards(shuffledCards)
+      setTurns(0)
+  }
+
+  const handleChoice = (card) => {
+    choiceOne ? setChoiceTwo(card) : setChoiceOne(card)
+  }
+
+  const resetChoices = () => {
+    setChoiceOne(null)
+    setChoiceTwo(null)
+    setTurns(turns => turns + 1)
+    setDisabled(false)
+  }
 
   return (
     <div className="App">
@@ -68,12 +77,14 @@ function App() {
             key={ card.id }
             card={ card }
             flipped= { choiceOne === card || choiceTwo === card || card.matched }
+            disabled = { disabled }
             handleChoice={ handleChoice }
           />
         ))}
       </div>
 
-      <div>Turns: { turns } </div>
+      <div>
+        <p>Turns: { turns }</p></div>
     </div>
   );
 }
