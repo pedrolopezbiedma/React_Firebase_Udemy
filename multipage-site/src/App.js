@@ -1,8 +1,10 @@
-import './App.css';
 import { BrowserRouter, Route, Switch, NavLink } from 'react-router-dom'
 import Home from './pages/Home';
-import Contact from './pages/Contact';
 import About from './pages/About';
+import Article from './pages/Article';
+import Contact from './pages/Contact';
+
+import './App.css';
 
 function App() {
   return (
@@ -16,14 +18,17 @@ function App() {
         </nav>
 
         <Switch>
-          <Route path='/contact'>
-            <Contact />
+        <Route exact path='/'>
+            <Home />
           </Route>
           <Route path='/about'>
             <About />
           </Route>
-          <Route exact path='/'>
-            <Home />
+          <Route path='/contact'>
+            <Contact />
+          </Route>
+          <Route path='/article/:id'>
+            <Article />
           </Route>
         </Switch>
       </BrowserRouter>
