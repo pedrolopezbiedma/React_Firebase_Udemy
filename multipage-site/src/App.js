@@ -1,4 +1,4 @@
-import { BrowserRouter, Route, Switch, NavLink } from 'react-router-dom'
+import { BrowserRouter, Route, Switch, NavLink, Redirect } from 'react-router-dom'
 import Home from './pages/Home';
 import About from './pages/About';
 import Article from './pages/Article';
@@ -18,7 +18,7 @@ function App() {
         </nav>
 
         <Switch>
-        <Route exact path='/'>
+          <Route exact path='/'>
             <Home />
           </Route>
           <Route path='/about'>
@@ -29,6 +29,9 @@ function App() {
           </Route>
           <Route path='/article/:id'>
             <Article />
+          </Route>
+          <Route>
+            <Redirect to='/'/>
           </Route>
         </Switch>
       </BrowserRouter>
