@@ -1,5 +1,6 @@
 import { BrowserRouter, Switch, Route } from 'react-router-dom'
 
+import Navbar from './components/Navbar'
 import Home from './pages/Home/Home'
 import Create from './pages/Create/Create'
 import Search from './pages/Search/Search'
@@ -10,8 +11,9 @@ import './App.css';
 function App() {
   return (
     <div className="App">
-
       <BrowserRouter>
+        <Navbar />
+
         <Switch>
           <Route exact path='/'>
             <Home />
