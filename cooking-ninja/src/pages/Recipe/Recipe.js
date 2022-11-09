@@ -13,7 +13,14 @@ export default function Recipe() {
 
       { recipe && (
         <div className='recipe'>
-          <h1>{ recipe.title }</h1>
+          <h2 className='page-title'>{ recipe.title }</h2>
+          <p> {recipe.cookingTime } to cook.</p>
+          <ul>
+            { recipe.ingredients.map((ingredient) => (
+              <li>{ ingredient }</li>
+            ))}
+          </ul>
+          <p className='method'>{ recipe.method }</p>
         </div>
       )}
     </div>
