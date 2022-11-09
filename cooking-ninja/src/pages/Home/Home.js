@@ -14,11 +14,6 @@ const { data: recipes, isLoading, error } = useFetch('http://localhost:3000/reci
       { recipes && (
         <RecipeList recipes={recipes}/>
       )}
-      { /* 
-      { recipes && recipes.map((recipe) => (
-        <h2>{ recipe.title }</h2>
-      ))}
-      */}
     </div>
   )
 }
