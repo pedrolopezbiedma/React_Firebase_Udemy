@@ -17,7 +17,7 @@ export default function Recipe() {
           <p> {recipe.cookingTime } to cook.</p>
           <ul>
             { recipe.ingredients.map((ingredient) => (
-              <li>{ ingredient }</li>
+              <li key={ingredient}>{ ingredient }</li>
             ))}
           </ul>
           <p className='method'>{ recipe.method }</p>
