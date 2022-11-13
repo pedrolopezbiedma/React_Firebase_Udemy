@@ -4,7 +4,7 @@ import { useFetch } from '../../hooks/useFetch'
 import './Create.css'
 
 export default function Create() {
-  const { postData, data, error } = useFetch('http://localhost:3000/recipes', 'POST')
+  const { postData, data } = useFetch('http://localhost:3000/recipes', 'POST')
 
   const [title, setTitle] = useState('')
   const [method, setMethod] = useState('')
@@ -13,6 +13,7 @@ export default function Create() {
   const [ingredients, setIngredients] = useState([])
   const history = useHistory();
 
+  // Redirect the user once the submit is completed
   useEffect(() => {
     if(data) {
       history.push('/')
