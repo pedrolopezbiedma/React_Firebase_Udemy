@@ -5,10 +5,26 @@ export default function Create() {
   const [title, setTitle] = useState('')
   const [method, setMethod] = useState('')
   const [cookingTime, setCookingTime] = useState('')
+  const [newIngredient, setNewIngredient] = useState('')
+  const [ingredients, setIngredients] = useState([])
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    console.log(title, method, cookingTime);
+    console.log(title, ingredients, method, cookingTime);
+
+  }
+
+  const handleAddIngredient = (event) => {
+    event.preventDefault();
+    const ingredient = newIngredient.trim();
+
+    if(ingredient && !ingredients.includes(ingredient)) {
+      setIngredients((prevIngredients) => {
+        return [...prevIngredients, ingredient]
+      })
+    }
+    setNewIngredient('')
+
 
   }
 
@@ -22,8 +38,18 @@ export default function Create() {
           <input type='text' value={title} onChange={(event) => setTitle(event.target.value)} required/>
         </label>
 
-      {/* Ingredientes */ }
-
+        <label>
+          <span>Ingredients:</span>
+          <div className='ingredients'>
+            <input type='text' value={newIngredient} onChange={(event) => setNewIngredient(event.target.value)} />
+            <button className='btn' onClick={handleAddIngredient}>Add</button>
+          </div>
+        </label>
+        <p>Current Ingredients:
+          { ingredients.map((ingredient) => (
+            <em key={ingredient}>{ ingredient }, </em>
+          ))}
+        </p>
         <label>
           <span>Method:</span>
           <textarea type='text' value={method} onChange={(event) => setMethod(event.target.value)} required/>
