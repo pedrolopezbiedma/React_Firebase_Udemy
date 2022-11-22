@@ -6,12 +6,15 @@ import Home from './pages/Home/Home'
 import Create from './pages/Create/Create'
 import Search from './pages/Search/Search'
 import Recipe from './pages/Recipe/Recipe'
+import { useThemeContext } from './hooks/useThemeContext'
 
 import './App.css';
 
 function App() {
+  const { mode } = useThemeContext();
+
   return (
-    <div className="App">
+    <div className={`App ${mode}`}>
       <BrowserRouter>
         <Navbar />
         <ThemeSelector />
