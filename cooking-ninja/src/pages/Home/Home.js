@@ -14,7 +14,6 @@ export default function Home() {
 
     projectFirestore.collection('recipes').get()
     .then((snapshot) => {
-      console.log('snapshot -->', snapshot)
       if(snapshot.empty) {
         setError('No recipes to load');
 
