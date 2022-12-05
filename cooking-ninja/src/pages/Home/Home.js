@@ -12,8 +12,7 @@ export default function Home() {
   useEffect(() => {
     setIsLoading(true);
 
-    projectFirestore.collection('recipes').get()
-    .then((snapshot) => {
+    const unsubscribe = projectFirestore.collection('recipes').onSnapshot((snapshot) => {
       if(snapshot.empty) {
         setError('No recipes to load');
 
@@ -27,11 +26,11 @@ export default function Home() {
       }
 
       setIsLoading(false);
+    }, (error) => {
+      setError(error.message)
     })
-    .catch((error) => {
-      setError(error);
-      setIsLoading(false);
-    })
+
+    return (() => unsubscribe())
   }, [])
   
   return (
