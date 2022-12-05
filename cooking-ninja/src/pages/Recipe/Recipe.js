@@ -16,8 +16,7 @@ export default function Recipe() {
   useEffect(() => {
     setIsLoading(true);
 
-    projectFirestore.collection('recipes').doc(id).get()
-    .then((document) => {
+    const unsubcribe = projectFirestore.collection('recipes').doc(id).onSnapshot((document) => {
       if(!document.exists){
         setError('Could not find that recipe.')
       } else {
@@ -26,14 +25,17 @@ export default function Recipe() {
 
       setIsLoading(false)
 
-    })
-    .catch((error) => {
-      setError(error);
+    }, (error) => {
+      setError(error.message)
       setIsLoading(false);
-
     })
+
+    return (() => unsubcribe())
   }, [id])
   
+  const handleUpdate = (id) => {
+    projectFirestore.collection('recipes').doc(id).update({ title: 'Something completely different'})
+  }
 
   return (
     <div>
@@ -50,6 +52,7 @@ export default function Recipe() {
             ))}
           </ul>
           <p className='method'>{ recipe.method }</p>
+          <button onClick={() => handleUpdate(id)}>Update me</button>
         </div>
       )}
     </div>
